@@ -1,8 +1,11 @@
-from sqlalchemy import Column, String, DateTime, text, JSON
-from sqlalchemy.dialects.postgresql import UUID, JSONB
-from datetime import datetime
 import uuid
+from datetime import datetime
+
+from sqlalchemy import JSON, Column, DateTime, String, text
+from sqlalchemy.dialects.postgresql import JSONB, UUID
+
 from core.database import Base
+
 
 class RawData(Base):
     __tablename__ = "bronze_raw_data"

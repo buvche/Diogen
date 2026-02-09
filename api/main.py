@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+
+from api.routes import ingest, verify
 from core.config import settings
 from core.logging import setup_logging
-from api.routes import ingest, verify
 
 setup_logging()
 
@@ -34,7 +35,8 @@ async def root():
   h1{font-size:1.8rem;margin-bottom:.25rem}
   .subtitle{color:#94a3b8;margin-bottom:2rem;font-size:.9rem}
   .card{background:#1e293b;border:1px solid #334155;border-radius:8px;padding:1.25rem;margin-bottom:1rem}
-  .card h2{font-size:1rem;color:#94a3b8;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:500}
+  .card h2{font-size:1rem;color:#94a3b8;margin-bottom:.75rem;
+    text-transform:uppercase;letter-spacing:.05em;font-weight:500}
   .status{display:flex;align-items:center;gap:.5rem}
   .dot{width:10px;height:10px;border-radius:50%;background:#ef4444}
   .dot.ok{background:#22c55e}
@@ -47,18 +49,22 @@ async def root():
   .stat .label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
   form{display:flex;flex-direction:column;gap:.75rem}
   label{font-size:.85rem;color:#94a3b8}
-  select,textarea{background:#0f172a;border:1px solid #334155;border-radius:6px;padding:.5rem .75rem;color:#e2e8f0;font-family:inherit;font-size:.85rem;resize:vertical}
+  select,textarea{background:#0f172a;border:1px solid #334155;border-radius:6px;
+    padding:.5rem .75rem;color:#e2e8f0;font-family:inherit;font-size:.85rem;resize:vertical}
   select:focus,textarea:focus{outline:none;border-color:#3b82f6}
-  button{background:#3b82f6;color:#fff;border:none;border-radius:6px;padding:.6rem 1.2rem;cursor:pointer;font-size:.85rem;font-weight:500;align-self:flex-start}
+  button{background:#3b82f6;color:#fff;border:none;border-radius:6px;
+    padding:.6rem 1.2rem;cursor:pointer;font-size:.85rem;font-weight:500;align-self:flex-start}
   button:hover{background:#2563eb}
   button:disabled{background:#334155;cursor:not-allowed}
-  .result{font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8rem;padding:.75rem;background:#0f172a;border-radius:6px;border:1px solid #334155;white-space:pre-wrap;display:none}
+  .result{font-family:'SF Mono',Monaco,Consolas,monospace;font-size:.8rem;padding:.75rem;
+    background:#0f172a;border-radius:6px;border:1px solid #334155;white-space:pre-wrap;display:none}
   .result.show{display:block}
   .result.err{border-color:#ef4444;color:#fca5a5}
   .result.ok{border-color:#22c55e;color:#86efac}
   .endpoints{list-style:none;font-family:monospace;font-size:.85rem}
   .endpoints li{padding:.35rem 0;display:flex;gap:.75rem;align-items:center}
-  .method{background:#22c55e20;color:#22c55e;padding:.15rem .4rem;border-radius:4px;font-size:.75rem;font-weight:600;min-width:3rem;text-align:center}
+  .method{background:#22c55e20;color:#22c55e;padding:.15rem .4rem;
+    border-radius:4px;font-size:.75rem;font-weight:600;min-width:3rem;text-align:center}
   .method.post{background:#3b82f620;color:#60a5fa}
   a{color:#60a5fa;text-decoration:none}
   a:hover{text-decoration:underline}
@@ -126,7 +132,8 @@ document.getElementById('ingestForm').addEventListener('submit',async e=>{
   }
   btn.disabled=true;btn.textContent='Sending...';
   try{
-    const r=await fetch('/api/ingest/'+src,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const h={'Content-Type':'application/json'};
+    const r=await fetch('/api/ingest/'+src,{method:'POST',headers:h,body:JSON.stringify(body)});
     const d=await r.json();
     res.className='result show '+(r.ok?'ok':'err');
     res.textContent=JSON.stringify(d,null,2);

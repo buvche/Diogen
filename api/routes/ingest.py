@@ -1,8 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException, Body, Request
-from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Any, Dict
-from core.database import get_db
+
+from fastapi import APIRouter, Body, Depends, HTTPException, Request
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from bronze.models import RawData
+from core.database import get_db
 from core.logging import logger
 
 router = APIRouter()
@@ -21,7 +23,7 @@ async def ingest_data(
     try:
         # Simple heuristic to determine event type (can be improved per source)
         event_type = request.headers.get("X-GitHub-Event") or payload.get("event") or "unknown"
-        
+
         raw_data = RawData(
             source=source,
             event_type=event_type,
@@ -30,7 +32,7 @@ async def ingest_data(
         db.add(raw_data)
         await db.commit()
         await db.refresh(raw_data)
-        
+
         logger.info(f"Ingested data from {source} (id={raw_data.id})")
         return {"status": "success", "id": str(raw_data.id)}
 

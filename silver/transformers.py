@@ -2,21 +2,22 @@
 Silver Layer Transformers - Bronze to Silver ETL
 Agent 2: Data Engineer
 """
+from typing import Any, Dict, List
+
 import polars as pl
-from typing import Dict, Any, List
-from datetime import datetime
+
 from core.logging import logger
 
 
 class GitHubTransformer:
     """Transform raw GitHub data from Bronze to Silver layer."""
-    
+
     @staticmethod
     def transform_pull_request(raw_data: Dict[str, Any], bronze_id: str) -> Dict[str, Any]:
         """Transform raw PR data to structured format."""
         payload = raw_data.get("payload", {})
         pr = payload.get("pull_request", payload)
-        
+
         return {
             "bronze_id": bronze_id,
             "repo_name": payload.get("repository", {}).get("full_name", "unknown"),
@@ -31,13 +32,13 @@ class GitHubTransformer:
             "deletions": pr.get("deletions", 0),
             "changed_files": pr.get("changed_files", 0),
         }
-    
+
     @staticmethod
     def transform_commit(raw_data: Dict[str, Any], bronze_id: str) -> Dict[str, Any]:
         """Transform raw commit data to structured format."""
         payload = raw_data.get("payload", {})
         commits = payload.get("commits", [])
-        
+
         results = []
         for commit in commits:
             results.append({
@@ -49,32 +50,32 @@ class GitHubTransformer:
                 "committed_at": commit.get("timestamp"),
             })
         return results
-    
+
     @staticmethod
     def batch_transform_with_polars(raw_records: List[Dict]) -> pl.DataFrame:
         """Use Polars for high-performance batch transformation."""
         df = pl.DataFrame(raw_records)
-        
+
         # Extract nested JSON fields using Polars
         transformed = df.with_columns([
             pl.col("payload").struct.field("repository").struct.field("full_name").alias("repo_name"),
             pl.col("payload").struct.field("pull_request").struct.field("number").alias("pr_number"),
             pl.col("payload").struct.field("pull_request").struct.field("title").alias("title"),
         ])
-        
+
         logger.info(f"Transformed {len(transformed)} records with Polars")
         return transformed
 
 
 class JiraTransformer:
     """Transform raw Jira data from Bronze to Silver layer."""
-    
+
     @staticmethod
     def transform_issue(raw_data: Dict[str, Any], bronze_id: str) -> Dict[str, Any]:
         """Transform raw Jira issue to structured format."""
         payload = raw_data.get("payload", {})
         fields = payload.get("fields", {})
-        
+
         return {
             "bronze_id": bronze_id,
             "issue_key": payload.get("key"),

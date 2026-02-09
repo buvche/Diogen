@@ -1,6 +1,8 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import PostgresDsn, computed_field
 from typing import Optional
+
+from pydantic import PostgresDsn, computed_field
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -11,7 +13,7 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "Diogen"
     API_V1_STR: str = "/api/v1"
-    
+
     # API Security
     API_KEY: Optional[str] = None  # If not set, auth is disabled (dev mode)
 
@@ -24,7 +26,7 @@ class Settings(BaseSettings):
 
     # GitHub Connector
     GITHUB_TOKEN: Optional[str] = None
-    
+
     # Jira Connector
     JIRA_BASE_URL: Optional[str] = None
     JIRA_EMAIL: Optional[str] = None

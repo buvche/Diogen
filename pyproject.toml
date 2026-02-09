@@ -1,9 +1,14 @@
 [tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "W"]
 ignore = []
-line-length = 88
 
-[tool.ruff.isort]
+[tool.ruff.lint.per-file-ignores]
+"alembic/*" = ["E402", "E501", "F811", "I001", "W291"]
+
+[tool.ruff.lint.isort]
 known-first-party = ["core", "api", "bronze", "silver", "gold", "connectors"]
 
 [tool.mypy]

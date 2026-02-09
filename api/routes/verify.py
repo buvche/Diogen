@@ -2,10 +2,11 @@
 Source Verification Endpoint
 Agent 3: Integration Engineer
 """
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from connectors.jira import JiraClient
+
 from connectors.github import GitHubClient
+from connectors.jira import JiraClient
 from core.config import settings
 from core.logging import logger
 
@@ -23,19 +24,19 @@ async def verify_source(request: SourceVerifyRequest):
         if request.source_type == "jira":
             if not settings.JIRA_BASE_URL or not settings.JIRA_EMAIL or not settings.JIRA_API_TOKEN:
                 raise HTTPException(status_code=400, detail="Jira credentials not configured")
-            
+
             client = JiraClient()
             # Try to fetch current user (myself) to verify auth
             user = await client._request("GET", "/myself")
             return {
-                "status": "success", 
+                "status": "success",
                 "message": f"Connected to Jira as {user.get('displayName')}",
                 "details": {
                     "url": settings.JIRA_BASE_URL,
                     "account": user.get("emailAddress")
                 }
             }
-            
+
         elif request.source_type == "github":
             # GitHub public access check or auth check if token present
             client = GitHubClient()
@@ -45,12 +46,12 @@ async def verify_source(request: SourceVerifyRequest):
             else:
                 # limited rate limit check
                 identity = "Public Access (No Token)"
-                
+
             return {
                 "status": "success",
                 "message": f"Connected to GitHub ({identity})"
             }
-            
+
         else:
             raise HTTPException(status_code=400, detail="Unknown source type")
 
