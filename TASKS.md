@@ -61,9 +61,9 @@
 
 - [x] Create `docker-compose.yml` (PostgreSQL 15)
 - [x] Add `Dockerfile` for the FastAPI application
-- [ ] Configure `alembic` for database migrations
+- [ ] Configure `alembic` for database migrations (Configured, pending initial migration)
 - [ ] Create initial migration for Bronze tables
-- [x] Add `Makefile` with common commands
+- [x] Add `Makefile` with common commands (Added `tests` alias)
 - [ ] Setup GitHub Actions CI/CD pipeline
 
 ---

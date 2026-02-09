@@ -95,11 +95,27 @@ pip install -r requirements.txt
 # 3. Run the API
 uvicorn api.main:app --reload
 
+
 # 4. Test ingestion
 curl -X POST http://localhost:8000/api/ingest/github \
   -H "Content-Type: application/json" \
   -d '{"event": "push", "repo": "diogen"}'
 ```
+
+## 🧪 Testing
+
+Run the automated test suite using the Makefile:
+
+```bash
+make tests
+```
+
+## ☁️ Deployment
+
+We use **Clever Cloud** for hosting.
+
+👉 **[Read the Deployment Guide](CLEVER_CLOUD_DEPLOY.md)** for detailed instructions.
+
 
 ---
 

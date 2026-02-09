@@ -1,0 +1,21 @@
+meta:
+  name: "Diogen"
+  description: "DevOps Metrics Tracker on Golem Network"
+  author: "buvche"
+  version: "0.1.0"
+
+payloads:
+  diogen:
+    runtime: "vm"
+    params:
+      image_hash: "0ee2aab840aea93bfdc6f16ff0ca8f5c192b5d8f2bbaff84d356d3cb"
+
+nodes:
+  diogen:
+    payload: "diogen"
+    init:
+      - run:
+          args: ["/bin/bash", "-c", "cd /app && POSTGRES_HOST=localhost POSTGRES_PORT=5432 POSTGRES_USER=diogen POSTGRES_PASSWORD=diogen POSTGRES_DB=diogen uvicorn api.main:app --host 0.0.0.0 --port 8000 &"]
+    http_proxy:
+      ports:
+        - "8000"
