@@ -1,4 +1,4 @@
-.PHONY: help install dev db-up db-down run test migrate lint clean
+.PHONY: help install dev db-up db-down run test tests migrate lint clean
 
 help:
 	@echo "Diogen - DevOps Metrics Tracker"
@@ -26,7 +26,9 @@ db-down:
 	docker compose down
 
 test:
-	pytest -v
+	python -m pytest -v
+
+tests: test
 
 migrate:
 	alembic upgrade head
