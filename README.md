@@ -1,9 +1,33 @@
 # Diogen
-The Easiaest, Smartest, Intuitive. Devops metrics tracker.
+The Easiest, Smartest, Intuitive. DevOps metrics tracker.
 
 # Project DIOGEN 🕯️
 
 > **"Discovering the truth in your engineering data."**
+
+## 🚀 Project Status
+
+| Status | Phase |
+|--------|-------|
+| ✅ Complete | Phase 1: Foundation & Infrastructure |
+| 🔄 In Progress | Phase 2: Bronze Layer (Raw Ingestion) |
+| ⏳ Pending | Phase 3-6: Connectors, Silver, Gold, API |
+
+> 📋 See [TASKS.md](TASKS.md) for detailed team assignments and progress.
+
+---
+
+## 👥 Agile Team Structure
+
+| Agent | Role | Responsibility |
+|-------|------|----------------|
+| 🟢 Agent 1 | **Backend Developer** | API endpoints, authentication, core logic |
+| 🔵 Agent 2 | **Data Engineer** | Bronze/Silver/Gold data pipelines |
+| 🟣 Agent 3 | **Integration Engineer** | GitHub, Jira, AWS connectors |
+| 🟠 Agent 4 | **DevOps Engineer** | Docker, CI/CD, migrations |
+| 🟡 Agent 5 | **QA & Documentation** | Testing, docs, code quality |
+
+---
 
 <div align="center">
   <p>
@@ -55,3 +79,30 @@ diogen/
 ├── core/           # Конфигурација, Логирање, База (DB Connection)
 ├── api/            # FastAPI ендпоинти
 └── docker-compose.yml
+```
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# 1. Start PostgreSQL
+docker compose up -d
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the API
+uvicorn api.main:app --reload
+
+# 4. Test ingestion
+curl -X POST http://localhost:8000/api/ingest/github \
+  -H "Content-Type: application/json" \
+  -d '{"event": "push", "repo": "diogen"}'
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
