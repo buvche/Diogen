@@ -19,6 +19,9 @@ sys.path.append(os.getcwd())
 
 from core.database import Base
 from core.config import settings
+from bronze.models import *  # noqa
+from silver.models import *  # noqa
+from gold.models import *  # noqa
 
 config.set_main_option("sqlalchemy.url", str(settings.SQLALCHEMY_DATABASE_URI))
 

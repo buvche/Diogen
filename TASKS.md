@@ -62,9 +62,15 @@
 - [x] Create `docker-compose.yml` (PostgreSQL 15)
 - [x] Add `Dockerfile` for the FastAPI application
 - [ ] Configure `alembic` for database migrations (Configured, pending initial migration)
-- [ ] Create initial migration for Bronze tables
+- [x] Create initial migration for Bronze tables
 - [x] Add `Makefile` with common commands (Added `tests` alias)
-- [ ] Setup GitHub Actions CI/CD pipeline
+- [x] Setup GitHub Actions CI/CD pipeline
+    - [x] Create `.github/workflows/ci.yml` (Lint & Test)
+    - [x] Add Code Coverage reporting (`pytest-cov`)
+    - [x] Configure Pre-commit hooks (`.pre-commit-config.yaml`)
+    - [ ] Create `.github/workflows/ci.yml` (Lint & Test)
+    - [ ] Add Code Coverage reporting (`pytest-cov`)
+    - [ ] Configure Pre-commit hooks (`.pre-commit-config.yaml`)
 
 ---
 
@@ -80,6 +86,7 @@
 ### Documentation
 - [x] Update `README.md` with project status
 - [x] Create `TASKS.md` with team structure
+- [x] Create `PROJECT_STATUS.md` with agent reports
 - [ ] Add API usage examples to README
 - [ ] Create `CONTRIBUTING.md`
 
@@ -92,8 +99,8 @@
 | 🟢 Agent 1 | Backend Developer | █████████░ 90% |
 | 🔵 Agent 2 | Data Engineer | ████████░░ 80% |
 | 🟣 Agent 3 | Integration Engineer | ███████░░░ 70% |
-| 🟠 Agent 4 | DevOps Engineer | ██████░░░░ 60% |
-| 🟡 Agent 5 | QA & Documentation | ███████░░░ 70% |
+| 🟠 Agent 4 | DevOps Engineer | ███████░░░ 70% |
+| 🟡 Agent 5 | QA & Documentation | ████████░░ 80% |
 
 ---
 

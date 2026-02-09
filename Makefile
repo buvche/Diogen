@@ -30,12 +30,18 @@ test:
 
 tests: test
 
+test-cov:
+	python -m pytest --cov=. --cov-report=term-missing
+
 migrate:
 	alembic upgrade head
 
 lint:
 	ruff check .
 	mypy .
+
+install-hooks:
+	pre-commit install
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} +
