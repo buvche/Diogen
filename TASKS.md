@@ -61,16 +61,15 @@
 
 - [x] Create `docker-compose.yml` (PostgreSQL 15)
 - [x] Add `Dockerfile` for the FastAPI application
-- [ ] Configure `alembic` for database migrations (Configured, pending initial migration)
-- [x] Create initial migration for Bronze tables
-- [x] Add `Makefile` with common commands (Added `tests` alias)
+- [x] Configure `alembic` for database migrations
+- [x] Create initial migration for Bronze, Silver, and Gold tables
+- [x] Add `Makefile` with common commands
 - [x] Setup GitHub Actions CI/CD pipeline
     - [x] Create `.github/workflows/ci.yml` (Lint & Test)
-    - [x] Add Code Coverage reporting (`pytest-cov`)
-    - [x] Configure Pre-commit hooks (`.pre-commit-config.yaml`)
-    - [ ] Create `.github/workflows/ci.yml` (Lint & Test)
-    - [ ] Add Code Coverage reporting (`pytest-cov`)
+    - [x] Add Code Coverage reporting (`pytest-cov` + Codecov)
+    - [x] Fix all Ruff lint errors (155 errors resolved)
     - [ ] Configure Pre-commit hooks (`.pre-commit-config.yaml`)
+- [ ] Add staging deployment workflow
 
 ---
 
@@ -99,7 +98,7 @@
 | 🟢 Agent 1 | Backend Developer | █████████░ 90% |
 | 🔵 Agent 2 | Data Engineer | ████████░░ 80% |
 | 🟣 Agent 3 | Integration Engineer | ███████░░░ 70% |
-| 🟠 Agent 4 | DevOps Engineer | ███████░░░ 70% |
+| 🟠 Agent 4 | DevOps Engineer | █████████░ 90% |
 | 🟡 Agent 5 | QA & Documentation | ████████░░ 80% |
 
 ---
@@ -112,7 +111,8 @@ Diogen/
 │   ├── main.py          # FastAPI app entry
 │   ├── auth.py          # API key authentication
 │   └── routes/
-│       └── ingest.py    # Ingestion endpoint
+│       ├── ingest.py    # Ingestion endpoint
+│       └── verify.py    # Source verification
 ├── bronze/
 │   └── models.py        # RawData table
 ├── silver/

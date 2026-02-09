@@ -10,8 +10,12 @@ The Easiest, Smartest, Intuitive. DevOps metrics tracker.
 | Status | Phase |
 |--------|-------|
 | ✅ Complete | Phase 1: Foundation & Infrastructure |
-| 🔄 In Progress | Phase 2: Bronze Layer (Raw Ingestion) |
-| ⏳ Pending | Phase 3-6: Connectors, Silver, Gold, API |
+| ✅ Complete | Phase 2: Bronze Layer (Raw Ingestion) |
+| ✅ Complete | Phase 3: Connectors (GitHub, Jira) |
+| ✅ Complete | Phase 4: Silver Layer (ETL Transformers) |
+| ✅ Complete | Phase 5: Gold Layer (DORA Metrics) |
+| ✅ Complete | Phase 6: API, Auth, CI/CD |
+| ⏳ Pending | Phase 7: Scheduler, Dashboard, AWS Connector |
 
 > 📋 See [TASKS.md](TASKS.md) for detailed team assignments and progress.
 
@@ -112,10 +116,9 @@ make tests
 
 ## ☁️ Deployment
 
-We use **Clever Cloud** for hosting.
-
-👉 **[Read the Deployment Guide](CLEVER_CLOUD_DEPLOY.md)** for detailed instructions.
-
+Options:
+- **Clever Cloud** — 👉 [Deployment Guide](CLEVER_CLOUD_DEPLOY.md)
+- **Golem Network** — Decentralized compute via GVMI images (experimental)
 
 ---
 
